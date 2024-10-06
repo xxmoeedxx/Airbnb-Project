@@ -1,7 +1,7 @@
 const mockListings = [
     {
       id: 1,
-      image: '/images/home1.jpg',
+      image: 'src/data/images/home1.jpg',
       title: 'Cozy Beachfront House',
       type: 'Entire home',
       guests: 4,
@@ -12,7 +12,7 @@ const mockListings = [
     },
       {
           id: 2,
-          image: '/images/home2.jpg',
+          image: 'src/data/images/home2.jpg',
           title: 'Modern Apartment in City Center',
           type: 'Apartment',
           guests: 2,
@@ -23,7 +23,7 @@ const mockListings = [
         },
         {
           id: 3,
-          image: '/images/home3.jpg',
+          image: 'src/data/images/home3.jpg',
           title: 'Rustic Cabin in the Woods',
           type: 'Cabin',
           guests: 6,
@@ -34,7 +34,7 @@ const mockListings = [
         },
       {
           id: 4,
-          image: '/images/home4.jpg',
+          image: 'src/data/images/home4.jpg',
           title: 'Spacious Countryside Villa',
           type: 'Entire home',
           guests: 8,
@@ -45,7 +45,7 @@ const mockListings = [
       },
       {
           id: 5,
-          image: '/images/home5.jpg',
+            image: 'src/data/images/home5.jpg',
           title: 'Luxury Penthouse with City View',
           type: 'Penthouse',
           guests: 4,
@@ -56,7 +56,7 @@ const mockListings = [
       },
       {
           id: 6,
-          image: '/images/home6.jpg',
+            image: 'src/data/images/home6.jpg',
           title: 'Charming Cottage by the Lake',
           type: 'Cottage',
           guests: 5,
@@ -67,7 +67,7 @@ const mockListings = [
       },
       {
           id: 7,
-          image: '/images/home7.jpg',
+            image: 'src/data/images/home7.jpg',
           title: 'Modern Loft in Downtown',
           type: 'Loft',
           guests: 2,
@@ -78,7 +78,7 @@ const mockListings = [
       },
       {
           id: 8,
-          image: '/images/home8.jpg',
+            image: 'src/data/images/home8.jpg',
           title: 'Secluded Mountain Retreat',
           type: 'Cabin',
           guests: 6,
@@ -89,7 +89,7 @@ const mockListings = [
       },
       {
           id: 9,
-          image: '/images/home9.jpg',
+            image: 'src/data/images/home9.jpg',
           title: 'Historic Home with Garden',
           type: 'Entire home',
           guests: 7,
@@ -100,7 +100,7 @@ const mockListings = [
       },
       {
           id: 10,
-          image: '/images/home10.jpg',
+            image: 'src/data/images/home10.jpg',
           title: 'Beach House with Ocean View',
           type: 'Entire home',
           guests: 8,
