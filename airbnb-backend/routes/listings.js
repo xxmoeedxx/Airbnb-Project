@@ -22,11 +22,11 @@ router.get('/search', (req, res) => {
   let filteredListings = mockListings;
   // Filter by location
   if (title) {
-    console.log("Location: ",title);
+    // console.log("Location: ",title);
     filteredListings = filteredListings.filter((listing) =>
       listing.title.toLowerCase().includes(title.toLowerCase())    
     );
-    console.log(filteredListings);
+    // console.log(filteredListings);
   }
 
   // Filter by guests
