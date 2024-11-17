@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { FaBars } from 'react-icons/fa'; // Importing hamburger menu icon
-import { AiOutlineUser } from 'react-icons/ai'; // Importing user icon for Login/Signup
-
+import { FaBars } from 'react-icons/fa'; // Hamburger menu icon
+import { AiOutlineUser } from 'react-icons/ai'; // User icon for Login/Signup
+import { Link } from 'react-router-dom'; // Using Link for internal navigation
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -16,41 +16,67 @@ const Navbar = () => {
         
         {/* Logo Section */}
         <div className="flex items-center">
-            <a href="/" className="flex items-center text-2xl font-bold text-red-500">
+          <Link to="/" className="flex items-center text-2xl font-bold text-red-500">
+           
               <img src="src/assets/Airbnb_icon.png" alt="Airbnb Logo" className="h-8 w-8 mr-2" />
               airbnb
-            </a>
+            
+          </Link>
         </div>
 
         {/* Desktop Navigation Links */}
         <div className="hidden md:flex space-x-8">
-          <a href="/" className="hover:underline">Home</a>
-          <a href="/experiences" className="hover:underline">Experiences</a>
-          <a href="/online-experiences" className="hover:underline">Online Experiences</a>
+          <Link to="/" className="text-gray-700 hover:text-red-500 hover:underline transition">
+            Home
+          </Link>
+          <Link to="/experiences" className="text-gray-700 hover:text-red-500 hover:underline transition">
+            Experiences
+          </Link>
+          <Link to="/online-experiences" className="text-gray-700 hover:text-red-500 hover:underline transition">
+            Online Experiences
+          </Link>
+          <Link to="/bookings" className="text-gray-700 hover:text-red-500 hover:underline transition">
+            My Bookings
+          </Link> {/* Add "My Bookings" link */}
         </div>
 
         {/* User Menu */}
         <div className="hidden md:flex items-center space-x-4">
-          <AiOutlineUser size={24} className="text-gray-600" />
-          <button className="bg-gray-200 px-4 py-2 rounded-full hover:bg-gray-300">
+          <AiOutlineUser size={24} className="text-gray-600" aria-label="User Account" />
+          <button className="bg-gray-200 px-4 py-2 rounded-full hover:bg-gray-300 transition">
             Login / Signup
           </button>
         </div>
 
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center">
-          <button onClick={toggleMobileMenu} className="text-gray-600 focus:outline-none">
+          <button 
+            onClick={toggleMobileMenu} 
+            className="text-gray-600 focus:outline-none" 
+            aria-label="Toggle menu"
+          >
             <FaBars size={24} />
           </button>
         </div>
       </div>
 
       {/* Mobile Menu Links */}
-      <div className={`${isMobileMenuOpen ? 'block' : 'hidden'} md:hidden px-4 py-2 bg-white`}>
-        <a href="/" className="block py-2 hover:underline">Home</a>
-        <a href="/experiences" className="block py-2 hover:underline">Experiences</a>
-        <a href="/online-experiences" className="block py-2 hover:underline">Online Experiences</a>
-        <button className="block w-full mt-4 bg-gray-200 px-4 py-2 rounded-full hover:bg-gray-300">
+      <div 
+        className={`${isMobileMenuOpen ? 'block' : 'hidden'} md:hidden transition-all duration-300 px-4 py-2 bg-white`}
+      >
+        <Link to="/" className="block py-2 text-gray-700 hover:text-red-500 hover:underline transition">
+          Home
+        </Link>
+        <Link to="/experiences" className="block py-2 text-gray-700 hover:text-red-500 hover:underline transition">
+          Experiences
+        </Link>
+        <Link to="/online-experiences" className="block py-2 text-gray-700 hover:text-red-500 hover:underline transition">
+          Online Experiences
+        </Link>
+        <Link to="/bookings" className="block py-2 text-gray-700 hover:text-red-500 hover:underline transition">
+          My Bookings
+        </Link> {/* Add My Bookings link to mobile menu */}
+        <button className="block w-full mt-4 bg-gray-200 px-4 py-2 rounded-full hover:bg-gray-300 transition">
           Login / Signup
         </button>
       </div>
