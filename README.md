@@ -1,7 +1,3 @@
-Sure! Below is an expanded version of the `README.md` file that covers the entire project, including the search bar component and general project setup:
-
----
-
 # Responsive Travel Search Web Application
 
 ## Project Description
