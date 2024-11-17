@@ -3,19 +3,31 @@ import DatePicker from 'react-datepicker';
 import { FaSearch } from 'react-icons/fa';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const SearchBar = () => {
+interface SearchBarProps {
+  onSearch: (searchParams: { title: string; checkInDate: Date | null; checkOutDate: Date | null; guests: number }) => void;
+}
+
+const SearchBar = ({ onSearch }: SearchBarProps) => {
   // State to manage search bar visibility (for small screens)
   const [isVisible, setIsVisible] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
 
   // States for the form inputs
-  const [location, setLocation] = useState('');
+  const [title, setLocation] = useState('');
   const [checkInDate, setCheckInDate] = useState<Date | null>(null);
   const [checkOutDate, setCheckOutDate] = useState<Date | null>(null);
   const [guests, setGuests] = useState(1);
 
   const handleSearch = () => {
-    console.log(`Location: ${location}, Check-In: ${checkInDate}, Check-Out: ${checkOutDate}, Guests: ${guests}`);
+    //console.log(`Location: ${title}, Check-In: ${checkInDate}, Check-Out: ${checkOutDate}, Guests: ${guests}`);
+
+    onSearch({
+      title,
+      checkInDate,
+      checkOutDate,
+      guests,
+    });
+
   };
 
   // Detect if the screen is desktop size to show the expanded search bar by default
@@ -75,7 +87,7 @@ const SearchBar = () => {
                 id="location"
                 type="text"
                 placeholder="Search destinations"
-                value={location}
+                value={title}
                 onChange={(e) => setLocation(e.target.value)}
                 className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400"
               />
