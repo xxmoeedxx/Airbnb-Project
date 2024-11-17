@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import BackButton from '../components/BackButton';
 
 interface Booking {
   id: number;
@@ -34,6 +35,7 @@ const MyBookings = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <BackButton className="mb-4" />
       <h1 className="text-3xl font-bold text-red-500 mb-6">My Bookings</h1>
       {error && <p className="text-red-500">{error}</p>}
       {bookings.length > 0 ? (

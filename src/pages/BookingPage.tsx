@@ -1,5 +1,6 @@
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import BackButton from '../components/BackButton';
 
 // Helper function to parse query parameters
 const useQuery = () => {
@@ -77,6 +78,7 @@ const BookingPage = () => {
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-8">
+      <BackButton className="mb-4" />
       <h1 className="text-4xl font-bold text-center mb-6 text-red-500">
         Book Your Stay
       </h1>

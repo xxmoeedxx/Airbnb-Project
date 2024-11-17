@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import BackButton from '../components/BackButton';
 
 const ListingDetails = () => {
   const { id } = useParams();
@@ -17,6 +18,7 @@ const ListingDetails = () => {
   return (
     <div className="container mx-auto p-6">
       {/* Listing Title */}
+      <BackButton className="mb-4" />
       <h1 className="text-4xl font-bold mb-4">{listing.title}</h1>
 
       {/* Images Section */}
