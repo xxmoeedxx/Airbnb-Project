@@ -6,14 +6,12 @@ import ListingCard from '../components/ListingCard';
 import Footer from '../components/Footer';
 
 const Homepage = () => {
-  const [listings, setListings] = useState([{ id: 0, image: '', title: '', type: '', guests: 0, bedrooms: 0, bathrooms: 0, price: 0, rating: 0 }]); // Initialize with an empty array
-  const [filteredListings, setFilteredListings] = useState([{ id: 0, image: '', title: '', type: '', guests: 0, bedrooms: 0, bathrooms: 0, price: 0, rating: 0 }]); // Initialize with an empty array
+  const [filteredListings, setFilteredListings] = useState([{ id: 0, images: [], title: '', type: '', guests: 0, bedrooms: 0, bathrooms: 0, price: 0, rating: 0 }]); // Initialize with an empty array
 
   useEffect(() => {
     fetch('http://localhost:5000/api/listings')
       .then(response => response.json())
       .then(data => {
-        setListings(data);
         setFilteredListings(data); // By default, show all listings
       })
       .catch(error => console.error('Error fetching listings:', error));

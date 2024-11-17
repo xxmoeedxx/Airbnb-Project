@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom'
 interface Listing {
   id: number;
-  image: string;
+  images: string[];
   title: string;
   type: string;
   guests: number;
@@ -13,6 +13,7 @@ interface Listing {
 }
 
 const ListingCard: React.FC<{ listing: Listing }> = ({ listing }) => {
+  console.log(listing);
   return (
     <Link to={`/listings/${listing.id}`}>
     <div
@@ -21,7 +22,7 @@ const ListingCard: React.FC<{ listing: Listing }> = ({ listing }) => {
       {/* Property Image */}
       <div className="overflow-hidden">
         <img
-          src={listing.image}
+          src={listing.images[0]}
           alt={listing.title}
           className="w-full h-48 object-cover transition-transform transform hover:scale-110 duration-300 ease-in-out"
         />
