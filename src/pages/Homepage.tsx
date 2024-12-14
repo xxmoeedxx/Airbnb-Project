@@ -6,7 +6,7 @@ import ListingCard from '../components/ListingCard';
 import Footer from '../components/Footer';
 
 const Homepage = () => {
-  const [filteredListings, setFilteredListings] = useState([{ id: 0, images: [], title: '', type: '', guests: 0, bedrooms: 0, bathrooms: 0, price: 0, rating: 0 }]); // Initialize with an empty array
+  const [filteredListings, setFilteredListings] = useState([{ _id: "_", images: [], title: '', type: '', guests: 0, bedrooms: 0, bathrooms: 0, price: 0, rating: 0 }]); // Initialize with an empty array
 
   useEffect(() => {
     fetch('http://localhost:5000/api/listings')
@@ -48,7 +48,7 @@ const Homepage = () => {
         <Categories />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-8">
           {filteredListings.map((listing) => (
-            <ListingCard key={listing.id} listing={listing} />
+            <ListingCard key={listing._id} listing={listing} />
           ))}
         </div>
       </div>

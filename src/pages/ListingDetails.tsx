@@ -12,10 +12,17 @@ const ListingDetails = () => {
   const [listing, setListing] = useState({ id: 0, title: '', type: '', guests: 0, bedrooms: 0, bathrooms: 0, price: 0, images: [], amenities: [] });
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/listings/${id}`)
-      .then(response => response.json())
-      .then(data => setListing(data))
-      .catch(error => console.error('Error fetching listing:', error));
+    const fetchListing = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/listings/${id}`);
+        const data = await response.json();
+        setListing(data);
+      } catch (error) {
+        console.error('Error fetching listing:', error);
+      }
+    };
+  
+    fetchListing();
   }, [id]);
 
   console.log(listing);

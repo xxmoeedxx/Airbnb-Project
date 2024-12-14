@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 interface Listing {
-  id: number;
+  _id: string;
   images: string[];
   title: string;
   type: string;
@@ -15,7 +15,7 @@ interface Listing {
 const ListingCard: React.FC<{ listing: Listing }> = ({ listing }) => {
   console.log(listing);
   return (
-    <Link to={`/listings/${listing.id}`}>
+    <Link to={`/listings/${listing._id}`}>
     <div
       className="border rounded-lg overflow-hidden shadow-md bg-white transition-transform transform hover:scale-105 hover:shadow-lg duration-300 ease-in-out cursor-pointer"
     >
