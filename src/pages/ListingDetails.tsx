@@ -9,7 +9,7 @@ import { Navigation, Pagination } from "swiper/modules";
 
 const ListingDetails = () => {
   const { id } = useParams();
-  const [listing, setListing] = useState({ id: 0, title: '', type: '', guests: 0, bedrooms: 0, bathrooms: 0, price: 0, images: [], amenities: [] });
+  const [listing, setListing] = useState({ _id: id, title: '', type: '', guests: 0, bedrooms: 0, bathrooms: 0, price: 0, images: [], amenities: [] });
 
   useEffect(() => {
     const fetchListing = async () => {
@@ -17,6 +17,7 @@ const ListingDetails = () => {
         const response = await fetch(`http://localhost:5000/api/listings/${id}`);
         const data = await response.json();
         setListing(data);
+        console.log(listing);
       } catch (error) {
         console.error('Error fetching listing:', error);
       }
@@ -25,7 +26,7 @@ const ListingDetails = () => {
     fetchListing();
   }, [id]);
 
-  console.log(listing);
+  
 
   if (!listing) return <div>Loading...</div>;
 
@@ -93,7 +94,7 @@ const ListingDetails = () => {
           </div>
           
           
-            <Link to={`/book/${listing.id}?title=${encodeURIComponent(listing.title)}&price=${listing.price}`}>
+            <Link to={`/book/${listing._id}?title=${encodeURIComponent(listing.title)}&price=${listing.price}`}>
             <button className="w-full bg-red-500 text-white py-3 rounded-lg hover:bg-red-600 font-bold">
               Book Now
             </button>
