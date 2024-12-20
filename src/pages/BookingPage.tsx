@@ -23,7 +23,7 @@ const BookingPage = () => {
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false); // Track submission state
   const [bookingData, setBookingData] = useState({
-    listingId: parseInt(id || '0'),
+    listingId: (id || '0'),
     checkInDate: '',
     checkOutDate: '',
     guests: 0,
@@ -40,7 +40,7 @@ const BookingPage = () => {
     setTotalPrice(total);
     setListingTitle(title || '');
     setBookingData({
-      listingId: parseInt(id || '0'),
+      listingId: (id || '0'),
       checkInDate,
       checkOutDate,
       guests,
@@ -52,6 +52,7 @@ const BookingPage = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true); // Disable the button
+    console.log('Booking data:', bookingData);
     try {
       const response = await fetch('http://localhost:5000/api/bookings', {
         method: 'POST',

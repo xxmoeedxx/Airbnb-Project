@@ -77,13 +77,20 @@ app.get('/api/listings/:id', async (req, res) => {
 
 // 3. Create a booking
 app.post('/api/bookings', async (req, res) => {
-  const { user, listingId, checkInDate, checkOutDate, guests, totalPrice } = req.body;
+  // const { user, listingId, checkInDate, checkOutDate, guests, totalPrice } = req.body;
+  const { listingId, listingTitle, checkInDate, checkOutDate, guests, totalPrice } = req.body;
+  console.log("Listing ID: ",listingId);
+  console.log("Listing Title: ",listingTitle);
+  console.log("Check In Date: ",checkInDate);
+  console.log("Check Out Date: ",checkOutDate);
+  console.log("Guests: ",guests);
+  console.log("Total Price: ",totalPrice);
   try {
     const booking = await Booking.create({
-      user,
       listingId,
       checkInDate,
       checkOutDate,
+      listingTitle,
       guests,
       totalPrice,
     });

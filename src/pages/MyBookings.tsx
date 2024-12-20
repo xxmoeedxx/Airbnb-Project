@@ -43,11 +43,15 @@ const MyBookings = () => {
           {bookings.map((booking, index) => (
             <div key={index} className="bg-white p-4 rounded-lg shadow-md">
               {/* <h2 className="text-xl font-bold text-gray-800">Property ID: {booking.listingId}</h2> */}
-                <h3 className="text-lg font-semibold text-gray-700">{booking.listingTitle}</h3>
-              <p className="text-gray-600">Check-in: {booking.checkInDate}</p>
-              <p className="text-gray-600">Check-out: {booking.checkOutDate}</p>
-                <p className="text-gray-600">Guests: {booking.guests}</p>
-                <p className="text-gray-600">Total Price: ${booking.totalPrice}</p>
+              <h3 className="text-lg font-semibold text-gray-700">{booking.listingTitle}</h3>
+              <p className="text-gray-600">
+                Check-in: {new Date(booking.checkInDate).toLocaleDateString()}
+              </p>
+              <p className="text-gray-600">
+                Check-out: {new Date(booking.checkOutDate).toLocaleDateString()}
+              </p>
+              <p className="text-gray-600">Guests: {booking.guests}</p>
+              <p className="text-gray-600">Total Price: ${booking.totalPrice}</p>
 
             </div>
           ))}
