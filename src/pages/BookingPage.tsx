@@ -1,6 +1,7 @@
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import BackButton from '../components/BackButton';
+import useAuth from '../components/useAuth';
 
 // Helper function to parse query parameters
 const useQuery = () => {
@@ -10,6 +11,7 @@ const useQuery = () => {
 const BookingPage = () => {
   const { id } = useParams();
   const query = useQuery();
+  const {user} = useAuth();
   const title = query.get('title');
   const price = query.get('price');
   const navigate = useNavigate();
@@ -29,6 +31,7 @@ const BookingPage = () => {
     guests: 0,
     totalPrice: 0,
     listingTitle: '',
+    userId: user?.id || null,
   });
 
   useEffect(() => {
@@ -46,6 +49,7 @@ const BookingPage = () => {
       guests,
       totalPrice: total,
       listingTitle: title || '',
+      userId: user?.id || null,
     });
   }, [checkInDate, checkOutDate, guests, id, price, title]);
 

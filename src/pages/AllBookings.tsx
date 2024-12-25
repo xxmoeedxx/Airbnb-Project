@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 import BackButton from '../components/BackButton';
-import useAuth from '../components/useAuth';
-import Navbar from '../components/Navbar';
 
 interface Booking {
   id: number;
@@ -11,18 +9,18 @@ interface Booking {
   checkOutDate: string;
   guests: number;
   totalPrice: number;
+  userId: number;
 }
 
-const MyBookings = () => {
+const AllBookings = () => {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [error, setError] = useState('');
-  const { user } = useAuth();
 
   useEffect(() => {
     // Fetch bookings from backend
     const fetchBookings = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/bookings/user/${user?.id}`);
+        const response = await fetch('http://localhost:5000/api/bookings');
         if (!response.ok) {
           throw new Error('Failed to fetch bookings');
         }
@@ -37,10 +35,9 @@ const MyBookings = () => {
   }, []);
 
   return (
-    <div>
-    <Navbar></Navbar>
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <h1 className="text-3xl font-bold text-red-500 mb-6">My Bookings</h1>
+      <BackButton className="mb-4" />
+      <h1 className="text-3xl font-bold text-red-500 mb-6">All Bookings</h1>
       {error && <p className="text-red-500">{error}</p>}
       {bookings.length > 0 ? (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -56,16 +53,16 @@ const MyBookings = () => {
               </p>
               <p className="text-gray-600">Guests: {booking.guests}</p>
               <p className="text-gray-600">Total Price: ${booking.totalPrice}</p>
+              <p className="text-gray-600">User ID: {booking.userId}</p>
 
             </div>
           ))}
         </div>
       ) : (
-        <p className="text-gray-600">You have no current bookings.</p>
+        <p className="text-gray-600">There are no current bookings.</p>
       )}
     </div>
-  </div>
   );
 };
 
-export default MyBookings;
+export default AllBookings;

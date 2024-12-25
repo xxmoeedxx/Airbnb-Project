@@ -37,7 +37,20 @@ const Homepage = () => {
       .then(response => response.json())
       .then(data => setFilteredListings(data))
       .catch(error => console.error('Error fetching filtered listings:', error));
-      console.log("After filtering",filteredListings);
+  };
+
+  interface CategoryParams{
+    type: string;
+  }
+
+  const handleCategory = ({ type }: CategoryParams) => {
+    const query = new URLSearchParams({
+      type
+    }).toString();
+    fetch(`http://localhost:5000/api/listings/category?${query}`)
+      .then(response => response.json())
+      .then(data => setFilteredListings(data))
+      .catch(error => console.error('Error fetching filtered listings:', error));
   };
 
   return (
@@ -45,7 +58,7 @@ const Homepage = () => {
       <Navbar />
       <div className="p-4">
         <SearchBar onSearch={handleSearch} />
-        <Categories />
+        <Categories onCategorySearch={handleCategory} />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-8">
           {filteredListings.map((listing) => (
             <ListingCard key={listing._id} listing={listing} />

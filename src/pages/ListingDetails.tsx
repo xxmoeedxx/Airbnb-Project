@@ -17,7 +17,6 @@ const ListingDetails = () => {
         const response = await fetch(`http://localhost:5000/api/listings/${id}`);
         const data = await response.json();
         setListing(data);
-        console.log(listing);
       } catch (error) {
         console.error('Error fetching listing:', error);
       }

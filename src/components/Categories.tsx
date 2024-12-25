@@ -1,26 +1,28 @@
 // src/components/Categories.js
 import { useState, useRef } from 'react';
-import { FaChevronLeft, FaChevronRight, FaUmbrellaBeach, FaTree, FaFire, FaMountain, FaTractor, FaGem, FaWater, FaWineBottle, FaFortAwesome, FaSnowflake, FaCampground, FaHome, FaIgloo } from 'react-icons/fa'; // Import relevant icons
+import { FaChevronLeft, FaChevronRight, FaUmbrellaBeach, FaTree, FaFire, FaMountain, FaTractor, FaGem, FaWater, FaWineBottle, FaFortAwesome, FaSnowflake, FaCampground, FaHome, FaIgloo, FaBuilding, FaLandmark, FaWarehouse, FaStar } from 'react-icons/fa'; // Import relevant icons
 
 const categories = [
-  { name: 'Beachfront', icon: <FaUmbrellaBeach /> },
-  { name: 'Cabins', icon: <FaTree /> },
-  { name: 'Trending', icon: <FaFire /> },
-  { name: 'Mountain', icon: <FaMountain /> },
-  { name: 'Countryside', icon: <FaTractor /> },
-  { name: 'Luxe', icon: <FaGem /> },
-  { name: 'Lakefront', icon: <FaWater /> },
-  { name: 'Vineyards', icon: <FaWineBottle /> },
+  {name: 'All', icon: <FaStar />},
   { name: 'Castles', icon: <FaFortAwesome /> },
-  { name: 'Caves', icon: <FaMountain /> },
-  { name: 'Tiny Homes', icon: <FaHome /> },
-  { name: 'Domes', icon: <FaIgloo /> },
-  { name: 'Arctic', icon: <FaSnowflake /> },
-  { name: 'Camping', icon: <FaCampground /> },
+  { name: 'House', icon: <FaHome /> },
+  { name: 'Loft', icon: <FaBuilding /> },
+  { name: 'Cabin', icon: <FaTree /> },
+  { name: 'Villa', icon: <FaGem /> },
+  { name: 'Cottage', icon: <FaTractor /> },
+  { name: 'Chalet', icon: <FaCampground /> },
+  { name: 'Penthouse', icon: <FaBuilding /> },
+  { name: 'Mansion', icon: <FaLandmark /> },
+  { name: 'Jhonpri', icon: <FaHome /> },
+  { name: 'Kotha', icon: <FaWarehouse /> },
 ];
 
-const Categories = () => {
-  const [activeCategory, setActiveCategory] = useState("");
+
+interface CategoriesProps {
+  onCategorySearch: (CategoryParams: {type: string}) => void;
+} 
+const Categories = ({onCategorySearch}: CategoriesProps) => {
+  const [activeCategory, setActiveCategory] = useState("All");
   const containerRef = useRef<HTMLDivElement>(null); // Reference to the scrollable container
 
   // Function to scroll left
@@ -30,6 +32,17 @@ const Categories = () => {
         left: -500, // Adjust the scroll distance as needed
         behavior: 'smooth',
       });
+    }
+  };
+
+  const handleCategory = (category: string) => {
+    setActiveCategory(category);
+
+    // Call the handleCategory function from the parent component
+    if(category === "All"){
+      onCategorySearch({type: ""});
+    }else{
+    onCategorySearch({type: category});
     }
   };
 
@@ -65,7 +78,7 @@ const Categories = () => {
                 ? 'bg-red-500 text-white'
                 : 'bg-gray-100 hover:bg-gray-200'
             }`}
-            onClick={() => setActiveCategory(category.name)}>
+            onClick={() => handleCategory(category.name)}>
             <span className="text-xl">{category.icon}</span>
             <span>{category.name}</span>
           </button>
