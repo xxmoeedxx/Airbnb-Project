@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BackButton from '../components/BackButton';
 
@@ -11,7 +11,7 @@ const NewListing = () => {
     const [price, setPrice] = useState(0);
     // const [images, setImages] = useState<string[]>([]);
     const [amenities, setAmenities] = useState<string[]>([]);
-    const [rating, setRating] = useState(4.5);
+    const [rating] = useState(4.5);
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState<boolean>(false);
     const [files, setFiles] = useState<FileList | null>(null);

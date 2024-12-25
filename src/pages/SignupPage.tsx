@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import BackButton from '../components/BackButton';
 
 const SignupPage = () => {
     const [name, setName] = useState('');
@@ -20,12 +21,15 @@ const SignupPage = () => {
 
             if (!response.ok) throw new Error('Signup failed');
             setMessage('Signup successful! You can now log in.');
+
         } catch (err: any) {
             setError(err.message);
         }
     };
 
     return (
+        <div className='p-6 bg-gray-100'>
+             <BackButton className="mb-4" />
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <div className="max-w-md mx-auto px-6 py-8 bg-white shadow-md rounded-md">
                 <h1 className="text-2xl font-bold mb-6 text-center">Sign Up</h1>
@@ -72,6 +76,7 @@ const SignupPage = () => {
                 {message && <p className="text-green-500 mt-4 text-center">{message}</p>}
                 {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
             </div>
+        </div>
         </div>
     );
 };

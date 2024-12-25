@@ -68,8 +68,9 @@ const Navbar = () => {
           </div>
         ) : (
           <div className="hidden md:flex items-center space-x-4">
-            <Link to="/login" className="bg-gray-200 px-4 py-2 rounded-full hover:bg-gray-300 transition">
+            <Link to="/login" onClick={()=>localStorage.setItem('previousPage', window.location.pathname)} className="bg-gray-200 px-4 py-2 rounded-full hover:bg-gray-300 transition">
               Login / Signup
+              
             </Link>
           </div>
         )}

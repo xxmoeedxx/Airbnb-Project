@@ -36,56 +36,55 @@ const LoginPage = () => {
     };
 
     return (
-        <div className='p-6 bg-gray-100'>
-            {/* <BackButton className="mb-4" /> */}
-        <div className="flex justify-between items-center mb-4">
-            <BackButton />
-            <Link to="/admin" className="text-red-500 hover:underline">
-                Admin Login
-            </Link>
-        </div>
-        
-        <div className="flex items-center justify-center min-h-screen bg-gray-100">
-            <div className="max-w-md mx-auto px-6 py-8 bg-white shadow-md rounded-md">
-            <h1 className="text-2xl font-bold mb-6 text-center">Log In</h1>
-            <form onSubmit={handleLogin} className="space-y-4">
-                <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full p-3 border rounded-md"
-                required
-                />
-                <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full p-3 border rounded-md"
-                required
-                />
-                <button
-                type="submit"
-                className="w-full bg-red-500 text-white py-3 rounded-md hover:bg-red-600"
-                >
-                Log In
-                </button>
-            </form>
-            <div className="mt-4 text-center">
-                <p>
-                New to our website?{' '}
-                <Link
-                    to="/signup"
-                    className="text-red-500 hover:underline"
-                >
-                    Sign up here
+        <div className='pt-6 px-6 bg-gray-100'>
+            <div className="flex justify-between items-center mb-4">
+                <BackButton />
+                <Link to="/admin" className="text-red-500 hover:underline">
+                    Admin Login
                 </Link>
-                </p>
             </div>
-            {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
+
+            <div className="flex items-center justify-center min-h-screen bg-gray-100">
+                <div className="max-w-md mx-auto px-6 py-8 bg-white shadow-md rounded-md">
+                    <h1 className="text-2xl font-bold mb-6 text-center">Log In</h1>
+                    <form onSubmit={handleLogin} className="space-y-4">
+                        <input
+                            type="email"
+                            placeholder="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="w-full p-3 border rounded-md"
+                            required
+                        />
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="w-full p-3 border rounded-md"
+                            required
+                        />
+                        <button
+                            type="submit"
+                            className="w-full bg-red-500 text-white py-3 rounded-md hover:bg-red-600"
+                        >
+                            Log In
+                        </button>
+                    </form>
+                    <div className="mt-4 text-center">
+                        <p>
+                            New to our website?{' '}
+                            <Link
+                                to="/signup"
+                                className="text-red-500 hover:underline"
+                            >
+                                Sign up here
+                            </Link>
+                        </p>
+                    </div>
+                    {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
+                </div>
             </div>
-        </div>
         </div>
     );
 };

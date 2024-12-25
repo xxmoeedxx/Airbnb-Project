@@ -56,7 +56,6 @@ const BookingPage = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true); // Disable the button
-    console.log('Booking data:', bookingData);
     try {
       const response = await fetch('http://localhost:5000/api/bookings', {
         method: 'POST',

@@ -28,7 +28,8 @@ const LoginPage = () => {
             const decoded = JSON.parse(atob(data.token.split('.')[1])); // Decode JWT
             setUser({ id: decoded.id, email: decoded.email, role: decoded.role });
 
-            navigate('/'); // Redirect after login
+            const previousPage = localStorage.getItem('previousPage') || '/';
+            navigate(previousPage); // Redirect to the previous page after login
         } catch (err: any) {
             setError(err.message);
         }

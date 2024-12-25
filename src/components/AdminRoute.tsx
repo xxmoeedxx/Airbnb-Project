@@ -7,7 +7,12 @@ const AdminRoute = ({ children }: { children: JSX.Element }) => {
     // Show a loading spinner or placeholder while user state is being resolved
     return <div>Loading...</div>;
   }
-  return user?.role === 'admin' ? children : <Navigate to="/admin" />;
+  if (user && user.role === 'admin') {
+    return children;
+  } else {
+    localStorage.setItem('previousPage', window.location.pathname);
+    return <Navigate to="/admin" replace />;
+  }
 };
 
 export default AdminRoute;

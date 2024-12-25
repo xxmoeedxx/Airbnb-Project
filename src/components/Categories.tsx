@@ -1,6 +1,6 @@
 // src/components/Categories.js
 import { useState, useRef } from 'react';
-import { FaChevronLeft, FaChevronRight, FaUmbrellaBeach, FaTree, FaFire, FaMountain, FaTractor, FaGem, FaWater, FaWineBottle, FaFortAwesome, FaSnowflake, FaCampground, FaHome, FaIgloo, FaBuilding, FaLandmark, FaWarehouse, FaStar } from 'react-icons/fa'; // Import relevant icons
+import { FaChevronLeft, FaChevronRight, FaTree, FaTractor, FaGem, FaFortAwesome, FaCampground, FaHome, FaBuilding, FaLandmark, FaWarehouse, FaStar } from 'react-icons/fa'; // Import relevant icons
 
 const categories = [
   {name: 'All', icon: <FaStar />},
