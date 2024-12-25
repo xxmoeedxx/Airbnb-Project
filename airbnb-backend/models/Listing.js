@@ -11,6 +11,7 @@ const ListingSchema = new mongoose.Schema(
     images: [{ type: String }],
     amenities: [{ type: String }],
     createdAt: { type: Date, default: Date.now },
+    rating: { type: Number, required: true },
   },
   { collection: 'Listings' } // Explicitly specify the collection name
 );

@@ -1,7 +1,7 @@
 // src/routes/listings.js
 const express = require('express');
 const router = express.Router();
-const mockListings = require('../data/mockListings');
+const Listing = require('../models/Listing'); // Listing schema
 
 // Utility function to check if dates overlap
 const isDateOverlap = (checkIn, checkOut, listingCheckIn, listingCheckOut) => {
@@ -16,10 +16,10 @@ const isDateOverlap = (checkIn, checkOut, listingCheckIn, listingCheckOut) => {
 };
 
 // GET /api/listings - Retrieves listings based on optional search filters
-router.get('/search', (req, res) => {
+router.get('/search', async (req, res) => {
   const { title, guests, checkInDate, checkOutDate } = req.query;
 
-  let filteredListings = mockListings;
+  let filteredListings = await Listing.find();
   // Filter by location
   if (title) {
     // console.log("Location: ",title);
@@ -41,6 +41,19 @@ router.get('/search', (req, res) => {
     );
   }
 
+  // Send the filtered listings as the response
+  res.json(filteredListings);
+});
+
+router.get('/category', async (req, res) => {
+  const { type } = req.query;
+  let filteredListings = await Listing.find();
+  // Filter by category
+  if (type) {
+    filteredListings = filteredListings.filter((listing) =>
+      listing.type.toLowerCase().includes(type.toLowerCase())
+    );
+  }
   // Send the filtered listings as the response
   res.json(filteredListings);
 });

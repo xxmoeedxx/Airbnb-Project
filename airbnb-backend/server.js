@@ -5,21 +5,51 @@ const listings = require('./data/mockListings');
 const mongoose = require('mongoose');
 const bookings = require('./data/bookings.json'); // Import your mock bookings data
 const listingsRouter = require('./routes/listings');
+const loginRoutes = require('./routes/routes');
 const connectDB = require('./db');
 const Listing = require('./models/Listing'); // Listing schema
 const Booking = require('./models/Booking'); // Booking schema
+const multer = require('multer');
+const path = require('path');
 
 const app = express();
 const port = 5000;
+
 
 app.use(cors());
 app.use(express.json());
 // Routes
 app.use('/api/listings', listingsRouter);
+app.use('/api/auth', loginRoutes);
 // app.use('/images', express.static('../airbnb-backend/data/images'));
 
 // Connect to the database
 connectDB();
+// Configure storage for uploaded files
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, '../airbnb-backend/data/images/'); // Folder where files will be saved
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`); // Unique file names
+  },
+});
+
+const upload = multer({ storage });
+
+// Static folder to serve uploaded files
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Upload route
+app.post('/api/upload', upload.array('images', 10), (req, res) => {
+  try {
+    const filePaths = req.files.map((file) => `../airbnb-backend/data/images/${file.filename}`);
+    res.status(200).json({ filePaths }); // Return file paths
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to upload files' });
+  }
+});
 
 // app.get('/api/bookings', (req, res) => {
 //   res.json(bookings); // Send the bookings data as a response
@@ -78,13 +108,7 @@ app.get('/api/listings/:id', async (req, res) => {
 // 3. Create a booking
 app.post('/api/bookings', async (req, res) => {
   // const { user, listingId, checkInDate, checkOutDate, guests, totalPrice } = req.body;
-  const { listingId, listingTitle, checkInDate, checkOutDate, guests, totalPrice } = req.body;
-  console.log("Listing ID: ",listingId);
-  console.log("Listing Title: ",listingTitle);
-  console.log("Check In Date: ",checkInDate);
-  console.log("Check Out Date: ",checkOutDate);
-  console.log("Guests: ",guests);
-  console.log("Total Price: ",totalPrice);
+  const { listingId, listingTitle, checkInDate, checkOutDate, guests, totalPrice, userId } = req.body;
   try {
     const booking = await Booking.create({
       listingId,
@@ -93,6 +117,7 @@ app.post('/api/bookings', async (req, res) => {
       listingTitle,
       guests,
       totalPrice,
+      userId
     });
     res.status(201).json({ message: 'Booking created successfully', booking });
   } catch (err) {
@@ -104,6 +129,15 @@ app.post('/api/bookings', async (req, res) => {
 app.get('/api/bookings', async (req, res) => {
   try {
     const bookings = await Booking.find().populate('listingId'); // Populate to get listing details
+    res.status(200).json(bookings);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+// 7. Get all bookings for a certain user
+app.get('/api/bookings/user/:userId', async (req, res) => {
+  try {
+    const bookings = await Booking.find({ userId: req.params.userId }).populate('listingId');
     res.status(200).json(bookings);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -123,6 +157,8 @@ app.post('/api/admin/listings', async (req, res) => {
 // 6. Admin route to delete a listing
 app.delete('/api/admin/listings/:id', async (req, res) => {
   try {
+    const temp = await Listing.findById(req.params.id);
+    console.log("Temp: ",temp);
     const listing = await Listing.findByIdAndDelete(req.params.id);
     if (!listing) return res.status(404).json({ error: 'Listing not found' });
     res.status(200).json({ message: 'Listing deleted successfully' });
