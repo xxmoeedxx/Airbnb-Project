@@ -4,7 +4,7 @@ import { FaSearch } from 'react-icons/fa';
 import 'react-datepicker/dist/react-datepicker.css';
 
 interface SearchBarProps {
-  onSearch: (searchParams: { title: string; checkInDate: Date | null; checkOutDate: Date | null; guests: number }) => void;
+    onSearch: (searchParams: { title: string; checkInDate: Date | null; checkOutDate: Date | null; guests: number }) => void;
 }
 
 const SearchBar = ({ onSearch }: SearchBarProps) => {
