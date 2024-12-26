@@ -57,7 +57,7 @@ Start the backend server using npm or yarn:
 
 Using npm:
 ```bash
-npm run server
+npm run server.js
 ```
 
 ### 5. Run the Frontend:
@@ -65,7 +65,7 @@ In a new terminal, start the frontend development server:
 
 Using npm:
 ```bash
-npm start
+npm run dev
 ```
 
 ---
