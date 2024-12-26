@@ -1,8 +1,8 @@
 # Responsive Travel Search Web Application
 
-## Project Description
+## Project Overview
 
-This project is a **Airbnb Clone Application** built using **React** and **Tailwind CSS**. The application features a comprehensive search bar that allows users to enter a location, check-in/check-out dates, and the number of guests. The primary use case is for travel booking platforms or applications, similar to Airbnb or Booking.com.
+This project is an **Airbnb Clone Application** built using **React**, **Tailwind CSS**, and **Node.js** with **MongoDB** for the backend. The application features a comprehensive search bar that allows users to enter a location, check-in/check-out dates, and the number of guests. The primary use case is for travel booking platforms or applications, similar to Airbnb or Booking.com.
 
 The search bar's design is mobile-first, providing a simplified, compact view for smaller screens and an expanded, full-featured view for desktop users. The application uses **smooth animations** for transitions between states, ensuring a seamless and user-friendly experience.
 
@@ -12,8 +12,8 @@ The search bar's design is mobile-first, providing a simplified, compact view fo
 - **Guest Selection**: Dropdown for selecting the number of guests.
 - **Smooth Animations**: The transition between expanded and collapsed states is animated for improved user experience.
 - **Search Action**: Upon form submission, the selected data is logged for future integration with backend services or APIs.
-  
-This application can be easily extended to include backend integration for real-time data, or additional features such as filtering and sorting search results.
+- **Backend Integration**: Node.js and MongoDB for handling user data and search queries.
+- **Admin Panel**: Admin interface for managing listings and user data.
 
 ---
 
@@ -22,6 +22,7 @@ This application can be easily extended to include backend integration for real-
 ### Prerequisites:
 - **Node.js**: Ensure that you have Node.js installed on your machine (version 14.x or higher recommended).
 - **npm or yarn**: Make sure you have either npm (comes with Node.js) or yarn as a package manager.
+- **MongoDB**: Install MongoDB and ensure it is running on your machine.
 
 ### 1. Clone the Repository:
 ```bash
@@ -30,62 +31,90 @@ cd Airbnb-Project
 ```
 
 ### 2. Install Dependencies:
-Install all the required project dependencies with your preferred package manager:
+Install all the required project dependencies with npm:
 
 Using npm:
 ```bash
 npm install
 ```
 
-Or using yarn:
+Do it for backend directory as well.
+
 ```bash
-yarn install
+cd airbnb-backend
+npm install
 ```
 
-### 3. Build for Production:
-To create an optimized production build, run:
+### 3. Setup Environment Variables:
+Create a `.env` file in the `airbnb-backend` directory and add the following:
+```
+MONGO_URI=your_mongodb_connection_string
+PORT=5000
+```
+
+### 4. Run the Backend:
+Start the backend server using npm or yarn:
 
 Using npm:
 ```bash
-npm run build
+npm run server
 ```
 
-Or using yarn:
+### 5. Run the Frontend:
+In a new terminal, start the frontend development server:
+
+Using npm:
 ```bash
-yarn build
+npm start
 ```
-
-This will bundle your app into a `/build` folder, optimized for deployment.
 
 ---
 
-## Assumptions & Design Decisions
+## API Documentation
 
-### 1. **Responsive Layout**:
-   - The project follows a **mobile-first design approach**, which ensures that the application works optimally on smaller screens before scaling up to larger screens.
-   - **On mobile devices**: The search bar appears collapsed, with a compact "Where to?" button. When clicked, the search bar expands, showing the full input form for the user to select their travel details.
-   - **On desktop devices**: The search bar is expanded by default, making all options readily visible without needing user interaction.
+### Endpoints:
 
-### 2. **Component Design**:
-   - **Search Bar Component**: The search bar is its own React component, making it easy to reuse or modify independently. It includes fields for location, date selection (check-in, check-out), and a guests selector. 
-   - **Animation**: Smooth animations are added to the collapsing/expanding of the search bar for better UX, using CSS transitions via Tailwind classes and custom height transitions for smooth expansion.
-   
-### 3. **Date Picker Integration**:
-   - The application uses **react-datepicker** for both the check-in and check-out date selections. This library was chosen due to its simplicity, accessibility, and responsive design.
-   - Date pickers are styled to match the overall look and feel of the app, ensuring consistency across form elements.
+#### GET /api/listings
+- **Description**: Fetch all listings.
+- **Response**: JSON array of listings.
 
-### 4. **Search Button Behavior**:
-   - When the "Search" button is clicked, the current state of the form (location, dates, guests) is logged in the console. This is a placeholder for future integration with an API or backend service to handle actual search functionality.
+#### POST /api/listings
+- **Description**: Create a new listing.
+- **Request Body**: JSON object with listing details.
+- **Response**: JSON object of the created listing.
 
-### 5. **No Backend Integration**:
-   - This version of the project is front-end only. The search functionality logs the selected inputs to the console for demonstration purposes. In a real-world scenario, you could integrate it with a backend API to fetch search results or connect it to a third-party booking service.
+#### GET /api/listings/:id
+- **Description**: Fetch a single listing by ID.
+- **Response**: JSON object of the listing.
+
+#### DELETE /api/listings/:id
+- **Description**: Delete a listing by ID.
+- **Response**: Success message.
+#### GET /api/bookings
+- **Description**: Fetch all bookings.
+- **Response**: JSON array of bookings.
+
+#### POST /api/bookings
+- **Description**: Create a new booking.
+- **Request Body**: JSON object with booking details.
+- **Response**: JSON object of the created booking.
+
+#### GET /api/bookings/:id
+- **Description**: Fetch a single booking by ID.
+- **Response**: JSON object of the booking.
+
+### Admin Panel Access:
+- **URL**: `/admin`
+- **Description**: Access the admin panel to manage listings and user data.
+- **Authentication**: Admin login required.
 
 ---
 
 ## Future Improvements
 
-- **API Integration**: Integrate the search bar with a real-time API for fetching search results based on the user’s input.
 - **Error Handling**: Add validation and error-handling for user inputs, such as checking if both check-in and check-out dates are provided.
+- **Role-Based Registration**: Implement user roles such as guests and hosts, allowing different access levels and functionalities.
+- **Host Functionality**: Enable hosts to create, update, and manage their property listings, including availability and pricing.
 - **More Filters**: Add more search options like property type, price range, and location radius for a more comprehensive search experience.
 - **Testing**: Implement unit and integration tests using a framework like **Jest** or **React Testing Library** for component validation and future updates.
 - **Accessibility Improvements**: Make sure the search bar meets accessibility standards, such as keyboard navigation and screen reader compatibility.
@@ -96,10 +125,12 @@ This will bundle your app into a `/build` folder, optimized for deployment.
 
 - **React**: A popular JavaScript library for building user interfaces.
 - **Tailwind CSS**: A utility-first CSS framework for rapid UI development.
+- **Node.js**: JavaScript runtime for building the backend.
+- **MongoDB**: NoSQL database for storing application data.
 - **react-datepicker**: A lightweight date picker library for React.
 - **react-icons**: For adding icons in a simple and customizable way.
 - **TypeScript**: For building interactive components.
-  
+
 ---
 
 ## License
@@ -110,5 +141,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Feel free to customize the project as needed and build more advanced features upon this foundational code!
 
---- 
-
+---
