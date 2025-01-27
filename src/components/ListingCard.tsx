@@ -19,7 +19,7 @@ const ListingCard: React.FC<{ listing: Listing }> = ({ listing }) => {
   const handleDelete = async (id: string) => {
     if (window.confirm("Are you sure you want to delete this listing?")) {
       try {
-        const response = await fetch(`http://localhost:5000/api/admin/listings/${id}`, {
+        const response = await fetch(`https://airbnb-backend-dz76.onrender.com/api/admin/listings/${id}`, {
           method: 'DELETE',
         });
         if (response.ok) {

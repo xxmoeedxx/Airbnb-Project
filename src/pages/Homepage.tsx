@@ -9,7 +9,7 @@ const Homepage = () => {
   const [filteredListings, setFilteredListings] = useState([{ _id: "_", images: [], title: '', type: '', guests: 0, bedrooms: 0, bathrooms: 0, price: 0, rating: 0 }]); // Initialize with an empty array
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/listings')
+    fetch('https://airbnb-backend-dz76.onrender.com/api/listings')
       .then(response => response.json())
       .then(data => {
         setFilteredListings(data); // By default, show all listings
@@ -33,7 +33,7 @@ const Homepage = () => {
       checkOutDate: checkOutDate ? checkOutDate.toISOString() : '',
     }).toString();
     
-    fetch(`http://localhost:5000/api/listings/search?${query}`)
+    fetch(`https://airbnb-backend-dz76.onrender.com/api/listings/search?${query}`)
       .then(response => response.json())
       .then(data => setFilteredListings(data))
       .catch(error => console.error('Error fetching filtered listings:', error));
@@ -47,7 +47,7 @@ const Homepage = () => {
     const query = new URLSearchParams({
       type
     }).toString();
-    fetch(`http://localhost:5000/api/listings/category?${query}`)
+    fetch(`https://airbnb-backend-dz76.onrender.com/api/listings/category?${query}`)
       .then(response => response.json())
       .then(data => setFilteredListings(data))
       .catch(error => console.error('Error fetching filtered listings:', error));

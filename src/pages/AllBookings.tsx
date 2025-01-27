@@ -20,7 +20,7 @@ const AllBookings = () => {
     // Fetch bookings from backend
     const fetchBookings = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/bookings');
+        const response = await fetch('https://airbnb-backend-dz76.onrender.com/api/bookings');
         if (!response.ok) {
           throw new Error('Failed to fetch bookings');
         }

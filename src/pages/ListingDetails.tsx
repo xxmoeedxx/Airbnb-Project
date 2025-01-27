@@ -14,7 +14,7 @@ const ListingDetails = () => {
   useEffect(() => {
     const fetchListing = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/listings/${id}`);
+        const response = await fetch(`https://airbnb-backend-dz76.onrender.com/api/listings/${id}`);
         const data = await response.json();
         setListing(data);
       } catch (error) {
